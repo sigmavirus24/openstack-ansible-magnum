@@ -1,2 +1,93 @@
 ---
-# defaults file for openstack-ansible-magnum
+# Copyright 2016, Ian Cordasco
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+magnum_system_group_name: magnum
+magnum_system_user_name: magnum
+magnum_system_user_comment: Magnum System User
+magnum_system_user_shell: /bin/false
+magnum_system_user_home: "/var/lib/{{ magnum_system_user_name }}"
+magnum_log_directory: /var/log/magnum
+magnum_etc_directory: /etc/magnum
+
+magnum_api_program_name: magnum-api
+magnum_conductor_program_name: magnum-conductor
+
+magnum_policy_overrides: {}
+
+magnum_git_url: "https://git.openstack.org/openstack/magnum"
+magnum_git_install_branch: master
+magnum_git_destination: "/opt/magnum_{{ magnum_git_install_branch |replace('/', '_') }}"
+
+magnum_apt_packages:
+  - python-dev
+  - libssl-dev
+  - libxml2-dev
+  - libmysqlclient-dev
+  - libxslt-dev
+  - libpq-dev
+  - git
+  - libffi-dev
+  - gettext
+  - build-essential
+
+magnum_pip_packages:
+  - Babel
+  - PrettyTable
+  - PyYAML
+  - SQLAlchemy
+  - WSME
+  - WebOb
+  - alembic
+  - cliff
+  - decorator
+  - docker-py
+  - enum34
+  - eventlet
+  - greenlet
+  - iso8601
+  - jsonpatch
+  - keystonemiddleware
+  - netaddr
+  - oslo.concurrency
+  - oslo.config
+  - oslo.context
+  - oslo.db
+  - oslo.i18n
+  - oslo.log
+  - oslo.messaging
+  - oslo.middleware
+  - oslo.policy
+  - oslo.serialization
+  - oslo.service
+  - oslo.utils
+  - oslo.versionedobjects
+  - oslo.reports
+  - paramiko
+  - pbr
+  - pecan
+  - python-barbicanclient
+  - python-glanceclient
+  - python-heatclient
+  - python-neutronclient
+  - python-novaclient
+  - python-keystoneclient
+  - requests
+  - setuptools
+  - six
+  - stevedore
+  - taskflo
+  - cryptography
+  - urllib3
+  - magnum
