@@ -24,6 +24,22 @@ magnum_etc_directory: /etc/magnum
 magnum_api_program_name: magnum-api
 magnum_conductor_program_name: magnum-conductor
 
+magnum_service_name: magnum
+magnum_service_user_name: magnum
+magnum_service_type: container
+magnum_service_description: "OpenStack Containers (Magnum)"
+magnum_service_project_name: service
+magnum_service_role_names:
+  - admin
+magnum_service_region: RegionOne
+magnum_service_publicuri_protocol: http
+magnum_service_publicurl: "{{ magnum_service_publicuri_protocol }}://{{ external_lb_vip_address }}:{{ magnum_bind_port }}"
+magnum_service_internaluri_protocol: http
+magnum_service_internalurl: "{{ magnum_service_internaluri_protocol }}://{{ internal_lb_vip_address }}:{{ magnum_bind_port }}"
+magnum_service_adminuri_protocol: http
+magnum_service_adminurl: "{{ magnum_service_adminuri_protocol }}://{{ internal_lb_vip_address }}:{{ magnum_bind_port }}"
+
+magnum_config_overrides: {}
 magnum_policy_overrides: {}
 
 magnum_git_url: "https://git.openstack.org/openstack/magnum"
