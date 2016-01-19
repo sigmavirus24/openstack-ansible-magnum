@@ -30,3 +30,67 @@
     - magnum-api-setup
     - magnum-service-add
     - magnum-setup
+
+- name: Ensure the magnum user exists
+  keystone:
+    command: "ensure_user"
+    token: "{{ keystone_auth_admin_token }}"
+    endpoint: "{{ keystone_service_adminurl }}"
+    insecure: "{{ keystone_service_adminuri_insecure }}"
+    user_name: "{{ magnum_service_user_name }}"
+    tenant_name: "{{ magnum_service_project_name }}"
+    password: "{{ magnum_service_password |default('changeme') }}"
+  register: add_magnum_user
+  until: add_magnum_user |success
+  retries: 5
+  delay: 2
+  tags:
+    - magnum-api-setup
+    - magnum-service-add
+    - magnum-user-add
+    - magnum-setup
+
+- name: Ensure the magnum user has the admin role
+  keystone:
+    command: "ensure_user_role"
+    token: "{{ keystone_auth_admin_token }}"
+    endpoint: "{{ keystone_service_adminurl }}"
+    user_name: "{{ magnum_service_user_name }}"
+    tenant_name: "{{ magnum_service_project_name }}"
+    role_name: "{{ item }}"
+    insecure: "{{ keystone_service_adminuri_insecure }}"
+  register: ensure_magnum_roles
+  until: ensure_magnum_roles |success
+  retries: 5
+  delay: 2
+  with_items: magnum_service_role_names
+  tags:
+    - magnum-api-setup
+    - magnum-role-setup
+    - magnum-setup
+
+- name: Ensure the magnum endpoint is registered
+  keystone:
+    command: "ensure_endpoint"
+    token: "{{ keystone_auth_admin_token }}"
+    endpoint: "{{ keystone_service_adminurl }}"
+    insecure: "{{ keystone_service_adminuri_insecure }}"
+    region_name: "{{ magnum_service_region }}"
+    service_name: "{{ magnum_service_name }}"
+    service_type: "{{ magnum_service_type }}"
+    endpoint_list:
+      - url: "{{ magnum_service_publicurl }}"
+        interface: "public"
+      - url: "{{ magnum_service_internalurl }}"
+        interface: "internal"
+      - url: "{{ magnum_service_adminurl }}"
+        interface: "admin"
+  register: add_magnum_endpoints
+  until: add_magnum_endpoints |success
+  retries: 5
+  delay: 2
+  tags:
+    - magnum-api-setup
+    - magnum-service-add
+    - magnum-endpoints-add
+    - magnum-setup
