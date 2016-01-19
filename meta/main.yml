@@ -7,6 +7,7 @@ galaxy_info:
   min_ansible_version: 1.9
   platforms:
   - name: Ubuntu
+    versions:
     - trusty
   # Below are all categories currently available. Just as with
   # the platforms above, uncomment those that apply to your role.
