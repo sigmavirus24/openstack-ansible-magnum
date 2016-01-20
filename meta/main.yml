@@ -14,4 +14,4 @@ galaxy_info:
   # the platforms above, uncomment those that apply to your role.
   galaxy_tags:
   - cloud
-  # - openstack
+  - openstack
