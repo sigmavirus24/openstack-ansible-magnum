@@ -20,16 +20,16 @@
     owner: "{{ magnum_system_user_name }}"
     group: "{{ magnum_system_group_name }}"
     mode: "0644"
-    config_overrides: {{ item.config_overrides }}
+    config_overrides: "{{ item.config_overrides }}"
     config_type: "{{ item.config_type }}"
   with_items:
     - source: "magnum.conf.j2"
       destination: "{{ magnum_directory }}/magnum.conf"
-      config_overrides: {{ magnum_api_conf_overrides }}
+      config_overrides: "{{ magnum_config_overrides }}"
       config_type: "ini"
     - source: "policy.json.j2"
       destination: "{{ magnum_etc_directory }}/policy.json"
-      config_overrides: {{ magnum_policy_overrides }}
+      config_overrides: "{{ magnum_policy_overrides }}"
       config_type: "json"
   tags:
     - magnum-config-files
