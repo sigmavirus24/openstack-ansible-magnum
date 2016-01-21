@@ -103,7 +103,7 @@ magnum_pip_packages:
   - setuptools
   - six
   - stevedore
-  - taskflo
+  - taskflow
   - cryptography
   - urllib3
   - magnum
