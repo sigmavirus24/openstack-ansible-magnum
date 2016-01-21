@@ -24,7 +24,7 @@
     config_type: "{{ item.config_type }}"
   with_items:
     - source: "magnum.conf.j2"
-      destination: "{{ magnum_directory }}/magnum.conf"
+      destination: "{{ magnum_etc_directory }}/magnum.conf"
       config_overrides: "{{ magnum_config_overrides }}"
       config_type: "ini"
     - source: "policy.json.j2"
