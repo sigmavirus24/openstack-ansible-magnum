@@ -19,7 +19,7 @@
     login_password: "{{ galera_root_password }}"
     login_host: "{{ magnum_galera_address }}"
     name: "{{ magnum_galera_database_name }}"
-    state: "pesent"
+    state: "present"
   tags:
     - magnum-database-setup
     - magnum-db-setup
