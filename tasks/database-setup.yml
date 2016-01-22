@@ -32,7 +32,7 @@
     login_host: "{{ magnum_galera_address }}"
     name: "{{ magnum_galera_user }}"
     password: "{{ magnum_galera_password }}"
-    priv: "{{ magnum_galera_database }}.*:ALL"
+    priv: "{{ magnum_galera_database_name }}.*:ALL"
     host: "{{ item }}"
     state: "present"
   with_items:
