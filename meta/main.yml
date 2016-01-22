@@ -17,3 +17,4 @@ galaxy_info:
   - openstack
 dependencies:
   - pip_install
+  - pip_lock_down
