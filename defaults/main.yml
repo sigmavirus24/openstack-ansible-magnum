@@ -47,6 +47,10 @@ magnum_git_repo: "https://git.openstack.org/openstack/magnum"
 magnum_git_install_branch: master
 magnum_git_dest: "/opt/magnum_{{ magnum_git_install_branch |replace('/', '_') }}"
 
+# Database vars
+magnum_galera_database: magnum
+magnum_galera_user: magnum
+
 magnum_apt_packages:
   - python-dev
   - libssl-dev

@@ -23,6 +23,10 @@
 
 - include: upstart-init.yml
 
+- include: database-setup.yml
+  when: >
+    inventory_hostname == groups['magnum_all'][0]
+
 - include: service-setup.yml
   when: >
     inventory_hostname == groups['magnum_all'][0]

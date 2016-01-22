@@ -1,0 +1,55 @@
+---
+# Copyright 2016, Ian Cordasco
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- name: Create Magnum's database tables
+  mysql_db:
+    login_user: "{{ galera_root_user }}"
+    login_password: "{{ galera_root_password }}"
+    login_host: "{{ magnum_galera_address }}"
+    name: "{{ magnum_galera_database_name }}"
+    state: "pesent"
+  tags:
+    - magnum-database-setup
+    - magnum-db-setup
+    - magnum-setup
+
+- name: Give Magnum database access
+  mysql_user:
+    login_user: "{{ galera_root_user }}"
+    login_password: "{{ galera_root_password }}"
+    login_host: "{{ magnum_galera_address }}"
+    name: "{{ magnum_galera_user }}"
+    password: "{{ magnum_galera_password }}"
+    priv: "{{ magnum_galera_database }}.*:ALL"
+    host: "{{ item }}"
+    state: "present"
+  with_items:
+    - "localhost"
+    - "%"
+  tags:
+    - magnum-database-setup
+    - magnum-db-setup
+    - magnum-setup
+
+- name: Perform a synchronization of the Magnum database
+  command: "magnum-db-manage upgrade"
+  sudo: yes
+  sudo_user: "{{ magnum_system_user_name }}"
+  tags:
+    - magnum-database-setup
+    - magnum-db-setup
+    - magnum-database-sync
+    - magnum-db-sync
+    - magnum-setup
