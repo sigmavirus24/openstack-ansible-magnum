@@ -55,7 +55,7 @@ magnum_apt_packages:
   - python-dev
   - libssl-dev
   - libxml2-dev
-  - libmysqlclient-dev
+  # - libmysqlclient-dev
   - libxslt-dev
   - libpq-dev
   - git
