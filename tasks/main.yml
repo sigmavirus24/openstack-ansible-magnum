@@ -17,6 +17,10 @@
 
 - include: pre-install.yml
 
+- include: messaging-setup.yml
+  when: >
+    inventory_hostname == groups['magnum_all'][0]
+
 - include: install.yml
 
 - include: post-install.yml
