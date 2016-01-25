@@ -80,8 +80,19 @@
       magnum_venv_tag: "{{ openstack_release }}"
       magnum_venv_download_url: "{{ openstack_repo_url }}/venvs/{{ openstack_release }}/{{ ansible_distribution | lower }}/magnum-{{ openstack_release }}.tgz"
       magnum_config_overrides:
+        default:
+          rpc_backend: "{{ magnum_rpc_backend }}"
         database:
           connection: "mysql://{{ magnum_galera_user}}:{{ magnum_galera_password}}@{{ magnum_galera_address }}/{{ magnum_galera_database_name }}?charset=utf8"
+        oslo_messaging_rabbit:
+          rabbit_hosts: "{{ rabbitmq_servers }}"
+          rabbit_port: "{{ rabbitmq_port }}"
+          rabbit_userid: "{{ magnum_rabbitmq_userid }}"
+          rabbit_password: "{{ magnum_rabbitmq_password }}"
+          rabbit_virtual_host: "{{ magnum_rabbitmq_virtualhost }}"
+          rabbit_use_ssl: "{{ rabbitmq_use_ssl }}"
+          rabbit_notification_exchange: magnum
+          rabbit_notification_topic: notification
       tags:
         - "os-magnum"
     - { role: "openstack_openrc", tags: [ "openstack-openrc" ] }
