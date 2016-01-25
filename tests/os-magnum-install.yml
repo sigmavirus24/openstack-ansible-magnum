@@ -93,6 +93,20 @@
           rabbit_use_ssl: "{{ rabbitmq_use_ssl }}"
           rabbit_notification_exchange: magnum
           rabbit_notification_topic: notification
+        keystone_authtoken:
+          insecure: "{{ keystone_service_internaluri_insecure |bool }}"
+          auth_plugin: "{{ magnum_keystone_auth_plugin }}"
+          signing_dir: "{{ magnum_system_user_home }}/cache/api"
+          auth_url: "{{ keystone_service_adminuri }}"
+          auth_uri: "{{ keystone_service_internaluri }}"
+          project_domain_id: "{{ magnum_service_project_domain_id }}"
+          user_domain_id: "{{ magnum_service_user_domain_id }}"
+          project_name: "{{ magnum_service_project_name }}"
+          username: "{{ magnum_service_user_name }}"
+          password: "{{ magnum_service_password }}"
+          memcached_servers: "{{ memcached_servers }}"
+          token_cache_time: 300
+          revocation_cache_time: 60
       tags:
         - "os-magnum"
     - { role: "openstack_openrc", tags: [ "openstack-openrc" ] }
