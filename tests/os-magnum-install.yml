@@ -97,12 +97,12 @@
           rabbit_notification_exchange: magnum
           rabbit_notification_topic: notification
         keystone_authtoken:
-          internal_uri: "{{ keystone_service_adminuri }}"
+          identity_uri: "{{ keystone_service_adminuri }}"
           insecure: "{{ keystone_service_internaluri_insecure |bool }}"
           auth_type: "{{ magnum_keystone_auth_plugin }}"
           signing_dir: "{{ magnum_system_user_home }}/cache/api"
-          auth_url: "{{ keystone_service_adminuri }}"
-          auth_uri: "{{ keystone_service_internaluri }}"
+          auth_url: "{{ keystone_service_internaluri_v3 }}"
+          auth_uri: "{{ keystone_service_internaluri_v3 }}"
           project_domain_id: "{{ magnum_service_project_domain_id }}"
           user_domain_id: "{{ magnum_service_user_domain_id }}"
           project_name: "{{ magnum_service_project_name }}"
