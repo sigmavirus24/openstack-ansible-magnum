@@ -166,5 +166,23 @@ You will need to make a file named ``magnum.yml`` in
 Note that under properties you can also specify whether magnum runs in a 
 container or on bare metal with ``is_metal:`` set to ``true`` or ``false``.
 
+If you're testing this out on an AIO, you'll also need to update
+``playbooks/vars/configs/haproxy_config.yml`` with
+
+.. code-block:: yaml
+
+      - service:
+          haproxy_service_name: magnum
+          haproxy_backend_nodes: "{{ groups['magnum_all'] | default([]) }}"
+          haproxy_port: 9511
+          haproxy_balance_type: http
+          haproxy_balance_alg: leastconn
+          haproxy_backend_options:
+            - "forwardfor"
+            - "httpchk /status"
+            - "httplog"
+
+If you have already run ``haproxy-install.yml``, you will need to run it again.
+
 Finally, just run the playbook above and you should have a functional 
 Searchlight service.
