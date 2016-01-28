@@ -58,8 +58,8 @@ magnum_rabbitmq_virtualhost: /magnum
 
 # Keystone AuthToken/Middleware
 magnum_keystone_auth_plugin: password
-magnum_service_project_domain_id: default
-magnum_service_user_domain_id: default
+magnum_service_project_domain_name: Default
+magnum_service_user_domain_name: default
 magnum_service_project_name: service
 
 magnum_apt_packages:

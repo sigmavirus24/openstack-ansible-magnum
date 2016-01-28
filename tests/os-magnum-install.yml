@@ -97,19 +97,17 @@
           rabbit_notification_exchange: magnum
           rabbit_notification_topic: notification
         keystone_authtoken:
-          identity_uri: "{{ keystone_service_adminuri }}"
+          identity_uri: "{{ keystone_service_internaluri_v3 }}"
           insecure: "{{ keystone_service_internaluri_insecure |bool }}"
           auth_type: "{{ magnum_keystone_auth_plugin }}"
           signing_dir: "{{ magnum_system_user_home }}/cache/api"
           auth_url: "{{ keystone_service_internaluri_v3 }}"
           auth_uri: "{{ keystone_service_internaluri_v3 }}"
-          project_domain_id: "{{ magnum_service_project_domain_id }}"
-          user_domain_id: "{{ magnum_service_user_domain_id }}"
+          project_domain_name: "{{ magnum_service_project_domain_name }}"
+          user_domain_name: "{{ magnum_service_user_domain_name }}"
           project_name: "{{ magnum_service_project_name }}"
-          user-name: "{{ magnum_service_user_name }}"
+          username: "{{ magnum_service_user_name }}"
           password: "{{ magnum_service_password }}"
-          admin_user: "{{ magnum_service_user_name }}"
-          admin_password: "{{ magnum_service_password }}"
           memcached_servers: "{{ memcached_servers }}"
           token_cache_time: 300
           revocation_cache_time: 60
