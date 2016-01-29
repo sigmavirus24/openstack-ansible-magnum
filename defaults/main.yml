@@ -90,7 +90,7 @@ magnum_pip_packages:
   - greenlet
   - iso8601
   - jsonpatch
-  - keystonemiddleware
+  - keystonemiddleware==4.0.0
   - netaddr
   - oslo.concurrency
   - oslo.config
