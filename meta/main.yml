@@ -22,4 +22,3 @@ dependencies:
   - galera_client
   - pip_install
   - pip_lock_down
-  - hidekuro.kubernetes
